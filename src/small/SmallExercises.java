@@ -1,4 +1,4 @@
-package ex_small;
+package small;
 
 import java.util.*;
 

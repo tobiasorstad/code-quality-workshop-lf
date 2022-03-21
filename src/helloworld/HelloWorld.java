@@ -1,4 +1,4 @@
-package ex_helloworld;
+package helloworld;
 
 public class HelloWorld {
     public String sayHello() {
