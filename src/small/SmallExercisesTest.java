@@ -6,10 +6,44 @@ import static org.junit.Assert.assertThrows;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import org.junit.Test;
 
 public class SmallExercisesTest {
+  @Test
+  public void testCalculateLittleFormula() {
+    assertEquals(42, SmallExercises.calculateLittleFormula(0, 0, 0, true));
+    assertEquals(-42, SmallExercises.calculateLittleFormula(0, 0, 0, false));
+    assertEquals(89, SmallExercises.calculateLittleFormula(3, 7, 11, true));
+    assertEquals(-89, SmallExercises.calculateLittleFormula(3, 7, 11, false));
+    assertEquals(125, SmallExercises.calculateLittleFormula(7, 3, 11, true));
+    assertEquals(-125, SmallExercises.calculateLittleFormula(7, 3, 11, false));
+    assertEquals(145, SmallExercises.calculateLittleFormula(11, 13, 7, true));
+    assertEquals(-145, SmallExercises.calculateLittleFormula(11, 13, 7, false));
+  }
+
+  @Test
+  public void testMayAccess() {
+    assertFalse(SmallExercises.mayAccess(true, true, true));
+    assertTrue(SmallExercises.mayAccess(true, true, false));
+    assertFalse(SmallExercises.mayAccess(true, false, true));
+    assertFalse(SmallExercises.mayAccess(true, false, false));
+    assertFalse(SmallExercises.mayAccess(false, true, true));
+    assertFalse(SmallExercises.mayAccess(false, true, false));
+    assertFalse(SmallExercises.mayAccess(false, false, true));
+    assertFalse(SmallExercises.mayAccess(false, false, false));
+  }
+
+  @Test
+  public void testGetMinorYears() {
+    assertEquals(
+      IntStream.rangeClosed(0, 17).boxed().collect(Collectors.toSet()),
+      SmallExercises.getMinorYears()
+    );
+  }
+
   @Test
   public void testDescribeNumber() {
     assertEquals("HUGE!", SmallExercises.describeNumber(20001));

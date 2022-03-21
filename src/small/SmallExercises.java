@@ -9,13 +9,108 @@ public final class SmallExercises {
   // EXERCISE A
   // -------------------------------------------------------------------------
   //
+  // the method below computes some cute little formula
+  //
+  // the body of the method contains an expression that appears in both the
+  // "if" part and the "else" part of a conditional
+  //
+  // can you refactor the method so that this expression is not repeated?
+  //
+  public static int calculateLittleFormula(int a, int b, int c, boolean positive) {
+    if (positive) {
+      int z = c * a + 2 * b + 42;
+      return z;
+    } else {
+      int z = c * a + 2 * b + 42;
+      return -z;
+    }
+  }
+
+
+  // EXERCISE B
+  // -------------------------------------------------------------------------
+  //
+  // the method below performs an access check
+  //
+  // as always, the implementation is correct, but the method urgently needs
+  // some refactoring!
+  //
+  // can you refactor the method to make it cleaner? note that there is only
+  // one combination of inputs that returns TRUE
+  //
+  public static boolean mayAccess(boolean hasAccount, boolean hasCorrectPassword, boolean hasBeenDenied) {
+    if (!hasAccount) {
+      return false;
+    }
+
+    if (hasBeenDenied) {
+      return false;
+    }
+
+    if (hasAccount) {
+      if (hasCorrectPassword && !hasBeenDenied) {
+        return true;
+      }
+    }
+
+    if (!hasCorrectPassword) {
+      return false;
+    }
+
+    return true;
+  }
+
+
+  // EXERCISE C
+  // -------------------------------------------------------------------------
+  //
+  // the method below creates a set of all the numbers that correspond to years
+  // were you are not considered an adult under Norwegian law.
+  //
+  // often, creating a small collection "manually" in the fashion we do here
+  // might be okay, but when we're adding 18 elements, it gets quite tedious...
+  //
+  // refactor the method to make use of a for loop to add elements to the set
+  //
+  // (...or, choose some other nice and readable way to refactor the method,
+  // instead of a for loop, if you prefer :-)
+  //
+  public static Set<Integer> getMinorYears() {
+    Set<Integer> minorYears = new TreeSet<>();
+
+    minorYears.add(0);
+    minorYears.add(1);
+    minorYears.add(2);
+    minorYears.add(3);
+    minorYears.add(4);
+    minorYears.add(5);
+    minorYears.add(6);
+    minorYears.add(7);
+    minorYears.add(8);
+    minorYears.add(9);
+    minorYears.add(10);
+    minorYears.add(11);
+    minorYears.add(12);
+    minorYears.add(13);
+    minorYears.add(14);
+    minorYears.add(15);
+    minorYears.add(16);
+    minorYears.add(17);
+
+    return minorYears;
+  }
+
+
+  // EXERCISE D
+  // -------------------------------------------------------------------------
+  //
   // the method below is used to describe a number
   // (I really have no use for such a method, but let's ignore that for now...)
   //
   // the implementation is correct, but the problem is that the code style
   // in the body is all over the place
   //
-  // refactor the code so everything is nice and consistent. 
+  // refactor the code so everything is nice and consistent.
   // you're welcome to let the editor help you along, if you like.
   //
   public static String describeNumber(int n) {
@@ -27,9 +122,9 @@ if (n >= 10_000) return "very big!";
 
 if(n <= -20000) {
 return "TINY!";
-} 
+}
 
-      if ( n <= -10 * 1000) 
+      if ( n <= -10 * 1000)
       {
         return "very small!";
       }
@@ -37,24 +132,24 @@ return "TINY!";
   }
 
 
-  // EXERCISE B
+  // EXERCISE E
   // -------------------------------------------------------------------------
   //
   // the method below is used to determine whether four integers make up a
   // (strictly) increasing sequence
   //
   // identify what's going on, and rewrite the method to a simpler and more
-  // readable format. 
+  // readable format.
   //
   // your refactored code should come out as a single readable line of code,
   // with no if statements AND no new variables...
   //
   public static boolean isIncreasingSequence(int a, int b, int c, int d) {
-    if (a >= b || a >= c || a >= d) { 
+    if (a >= b || a >= c || a >= d) {
       return false;
     }
 
-    if (b >= c || b >= d) { 
+    if (b >= c || b >= d) {
       return false;
     }
 
@@ -66,7 +161,7 @@ return "TINY!";
   }
 
 
-  // EXERCISE C
+  // EXERCISE F
   // -------------------------------------------------------------------------
   //
   // the method below extracts query parameters from an URI string.
@@ -77,12 +172,12 @@ return "TINY!";
   //    "keyword2" -> "cher"
   //    "maxage" -> "2049"
   //
-  // the method is correct, but the implementation is sloppy and hard to read.    
+  // the method is correct, but the implementation is sloppy and hard to read.  
   //
   // apply the following refactorings to improve the quality of the code:
   // - introduce better variables names
   // - fix the comment
-  // - extract the repeated expression (uriString.indexOf("?")), and store it 
+  // - extract the repeated expression (uriString.indexOf("?")), and store it
   //   in a variable with a good name
   //
   // if you want to, you may also introduce constants for the magic string
@@ -97,23 +192,23 @@ return "TINY!";
     } else {
       for (String p : uriString.substring(uriString.indexOf("?")+1).split("&")) {
         String[] v = p.split("=");
-        foo.put(v[0], v[1]); 
+        foo.put(v[0], v[1]);
       }
       return foo;
     }
   }
 
 
-  // EXERCISE D
+  // EXERCISE G
   // -------------------------------------------------------------------------
   //
   // the method below has a good name, but the variables names in its body
-  // are a disgrace, and most of the comments and exception messages 
+  // are a disgrace, and most of the comments and exception messages
   // also need some urgent care
   //
-  // fix all these issues: 
+  // fix all these issues:
   // - variable names,
-  // - comments, 
+  // - comments,
   // - exception messages
   //
   public static int flooredRoot(double x) {
@@ -123,7 +218,7 @@ return "TINY!";
     }
 
     double tmp1 = Math.sqrt(x);
-    // TODO: xeplain 
+    // TODO: xeplain
     if (tmp1 > (double) Long.MAX_VALUE || (long) tmp1 > Integer.MAX_VALUE) {
       throw new IllegalArgumentException("square root too large to store as an int");
     }
@@ -134,12 +229,12 @@ return "TINY!";
   }
 
 
-  // EXERCISE E
+  // EXERCISE H
   // -------------------------------------------------------------------------
   //
-  // the method below is used to format an URL string. it will throw 
-  // IllegalArgumentException if any of its input arguments are null, 
-  // or if the argument scheme is not "http" or "https". 
+  // the method below is used to format an URL string. it will throw
+  // IllegalArgumentException if any of its input arguments are null,
+  // or if the argument scheme is not "http" or "https".
   //
   // the method body is written in a very complicated manner, which makes it
   // hard to see what's going on.
@@ -178,8 +273,8 @@ return "TINY!";
     return res;
   }
 
-  
-  // EXERCISE F
+
+  // EXERCISE I
   // -------------------------------------------------------------------------
   //
   // [HARDER exercise]
@@ -191,23 +286,23 @@ return "TINY!";
   // candidate for some refactoring...
   //
   // your tasks are as follows:
-  // - try to split the one giant expression into simpler expressions 
+  // - try to split the one giant expression into simpler expressions
   // - extract the magic number 6372.8 to a constant, with a nice name
   // - fix the coding style so it's consistent
   // - use either the Math.[method] syntax consistently, or the static imports.
   //   mixing both doesn't look nice.
   //
-  // note that even after a nice refactoring, this formula should still look 
-  // a bit cryptic! it's advanced stuff, after all. all we ask here, is that 
+  // note that even after a nice refactoring, this formula should still look
+  // a bit cryptic! it's advanced stuff, after all. all we ask here, is that
   // you make it a bit clearer.
   //
   public static double haversine(double lat1, double lon1, double lat2, double lon2) {
-    return 2 *  6372.8 * asin(sqrt(pow(Math.sin( toRadians(lat2-lat1)/2),2) + 
+    return 2 *  6372.8 * asin(sqrt(pow(Math.sin( toRadians(lat2-lat1)/2),2) +
       pow(sin(Math.toRadians(lon2 - lon1)/ 2),2) * cos(toRadians(lat1)) *cos(toRadians(lat2))));
   }
 
-  
-  // EXERCISE G
+
+  // EXERCISE J
   // -------------------------------------------------------------------------
   //
   // [HARDER exercise]
