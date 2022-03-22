@@ -1,4 +1,4 @@
-package small;
+package exercises;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;

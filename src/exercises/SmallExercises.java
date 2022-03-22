@@ -1,4 +1,4 @@
-package small;
+package exercises;
 
 import java.util.*;
 
