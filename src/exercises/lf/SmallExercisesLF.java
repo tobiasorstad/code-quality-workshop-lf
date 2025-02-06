@@ -235,7 +235,7 @@ public final class SmallExercisesLF {
   // you make it a bit clearer.
   //
   public static double haversine(double lat1, double lon1, double lat2, double lon2) {
-    double constant = 6372.8;
+    double earthRadius = 6372.8;
     double latDifference = toRadians(lat2-lat1);
     double lonDifference = toRadians(lon2-lon1);
     double latDifferenceSine = pow(sin( latDifference/2),2);
@@ -243,14 +243,15 @@ public final class SmallExercisesLF {
     double latOneCosine = cos(toRadians(lat1));
     double latTwoCosine = cos(toRadians(lat2));
 
-    return 2 * constant * asin(sqrt( latDifferenceSine + lonDifferenceSine * latOneCosine * latTwoCosine));
+    return 2 * earthRadius * asin(sqrt( latDifferenceSine + lonDifferenceSine * latOneCosine * latTwoCosine));
   }
 
   public static double haversine2(double lat1, double lon1, double lat2, double lon2) {
+    double earthRadius = 6372.8;
     double innerExpression =
         pow(Math.sin( toRadians(lat2-lat1)/2),2) +
         pow(sin(Math.toRadians(lon2 - lon1)/ 2),2) * cos(toRadians(lat1)) * cos(toRadians(lat2));
-    return 2 *  6372.8 * asin(sqrt(innerExpression));
+    return 2 * earthRadius * asin(sqrt(innerExpression));
   }
 
 
