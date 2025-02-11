@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.lang.Math.*;
-import static java.lang.Math.toRadians;
 
 public class HarderExercises {
 

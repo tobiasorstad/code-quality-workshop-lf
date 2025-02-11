@@ -1,5 +1,6 @@
-package exercises.lf;
+package exercises;
 
+import exercises.SmallExercisesLF;
 import org.junit.Test;
 
 import java.util.Map;
