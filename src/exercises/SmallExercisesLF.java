@@ -213,27 +213,5 @@ public final class SmallExercisesLF {
   }
 
 
-  // EXERCISE I
-  // -------------------------------------------------------------------------
-  //
-  // [HARDER exercise]
-  //
-  // the method below implements the famous Haversine formula for computing
-  // the shortest (non-flat-earth) distance between two coordinates on earth.
-  //
-  // the body is written in a quite cryptic and terse way, and is a good
-  // candidate for some refactoring...
-  //
-  // your tasks are as follows:
-  // - try to split the one giant expression into simpler expressions
-  // - extract the magic number 6372.8 to a constant, with a nice name
-  // - fix the coding style so it's consistent
-  // - use either the Math.[method] syntax consistently, or the static imports.
-  //   mixing both doesn't look nice.
-  //
-  // note that even after a nice refactoring, this formula should still look
-  // a bit cryptic! it's advanced stuff, after all. all we ask here, is that
-  // you make it a bit clearer.
-  //
 
 }

@@ -130,6 +130,7 @@ public class HarderExercises {
 
     public static List<String> getTopEmployees(List<Employee> employees) {
         return employees.stream()
+            .filter(e -> e.name != null)
             .sorted(Comparator.comparing(e -> e.name))
             .collect(Collectors.groupingBy(Employee::department))
             .values()
