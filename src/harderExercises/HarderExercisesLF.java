@@ -107,4 +107,29 @@ public class HarderExercisesLF {
     private static boolean employeeIsValid(HarderExercisesLF.Employee employee){
         return employee != null && employee.name != null;
     }
+
+    // EXERCISE L
+    // -------------------------------------------------------------------------
+    //
+    // [HARDER exercise]
+    // Description to come
+    //
+    public static boolean isLeapYear(int year) {
+        // If year is divisible by 4
+        if (year % 4 == 0) {
+            // If year is divisible by 100
+            if (year % 100 == 0) {
+                // If year is divisible by 400
+                if (year % 400 == 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
 }

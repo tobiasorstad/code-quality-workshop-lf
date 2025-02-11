@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertTrue;
 
 public class HarderExercisesTest {
 
@@ -132,5 +134,17 @@ public class HarderExercisesTest {
 
     List<String> result = HarderExercises.getTopEmployees(employees);
     assertEquals(List.of("EVE", "ALICE", "BOB"), result);
+  }
+  
+  @Test
+  public void testIsLeapYear() {
+      assertTrue(HarderExercises.isLeapYear(420));
+      assertTrue( HarderExercises.isLeapYear(2000));
+      assertFalse( HarderExercises.isLeapYear(2001));
+      assertTrue( HarderExercises.isLeapYear(2004));
+      assertFalse( HarderExercises.isLeapYear(2100));
+      assertFalse( HarderExercises.isLeapYear(2200));
+      assertFalse( HarderExercises.isLeapYear(2300));
+      assertTrue( HarderExercises.isLeapYear(2400));
   }
 }

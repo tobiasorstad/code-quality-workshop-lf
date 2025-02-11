@@ -138,4 +138,17 @@ public class HarderExercisesLFTest {
     List<String> result = HarderExercisesLF.getTopFivePaidEmployeeNames(employees);
     assertEquals(List.of("EVE", "ALICE", "BOB"), result);
   }
+
+  
+  @Test
+  public void testIsLeapYear() {
+      assertTrue(HarderExercises.isLeapYear(420));
+      assertTrue( HarderExercises.isLeapYear(2000));
+      assertFalse( HarderExercises.isLeapYear(2001));
+      assertTrue( HarderExercises.isLeapYear(2004));
+      assertFalse( HarderExercises.isLeapYear(2100));
+      assertFalse( HarderExercises.isLeapYear(2200));
+      assertFalse( HarderExercises.isLeapYear(2300));
+      assertTrue( HarderExercises.isLeapYear(2400));
+  }
 }
