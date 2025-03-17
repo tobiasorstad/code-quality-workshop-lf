@@ -88,6 +88,7 @@ public class HarderExercisesLF {
             "wss", 443
         );
 
+    // EXERCISE K
     public record Employee( String name, int salary, boolean active, String department){}
 
     public static List<String> getTopFivePaidEmployeeNames(List<HarderExercisesLF.Employee> employees) {
@@ -108,28 +109,24 @@ public class HarderExercisesLF {
         return employee != null && employee.name != null;
     }
 
-    // EXERCISE L
-    // -------------------------------------------------------------------------
-    //
-    // [HARDER exercise]
-    // Description to come
-    //
-    public static boolean isLeapYear(int year) {
-        // If year is divisible by 4
-        if (year % 4 == 0) {
-            // If year is divisible by 100
-            if (year % 100 == 0) {
-                // If year is divisible by 400
-                if (year % 400 == 0) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
-                return true;
-            }
-        } else {
-            return false;
-        }
+    // Exercise L
+    public static boolean isValidUser(String username, String password) {
+        final Map<String, String> users = Map.of("alice", "password123", "bob", "securepass");
+        return users.containsKey(username) && users.get(username).equals(password);
+    }
+
+    // Exercise M
+    //TODO
+
+    // Exercise N
+    private static final Map<String, Double> BASE_DISCOUNTS = Map.of(
+        "Gold", 15.0,
+        "Silver", 5.0,
+        "Bronze", 3.0
+    );
+
+    public static double calculateDiscount(String membershipLevel, boolean isHoliday) {
+        double discount = BASE_DISCOUNTS.getOrDefault(membershipLevel, 0.0);
+        return isHoliday ? discount + 5.0 : discount;
     }
 }

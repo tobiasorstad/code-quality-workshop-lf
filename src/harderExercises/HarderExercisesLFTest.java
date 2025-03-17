@@ -139,16 +139,38 @@ public class HarderExercisesLFTest {
     assertEquals(List.of("EVE", "ALICE", "BOB"), result);
   }
 
-  
   @Test
-  public void testIsLeapYear() {
-      assertTrue(HarderExercises.isLeapYear(420));
-      assertTrue( HarderExercises.isLeapYear(2000));
-      assertFalse( HarderExercises.isLeapYear(2001));
-      assertTrue( HarderExercises.isLeapYear(2004));
-      assertFalse( HarderExercises.isLeapYear(2100));
-      assertFalse( HarderExercises.isLeapYear(2200));
-      assertFalse( HarderExercises.isLeapYear(2300));
-      assertTrue( HarderExercises.isLeapYear(2400));
+  public void validUserReturnsTrue() {
+    assertTrue(HarderExercisesLF.isValidUser("alice", "password123"));
+  }
+
+  @Test
+  public void invalidUserReturnsFalse() {
+    assertFalse(HarderExercisesLF.isValidUser("charlie", "randompass"));
+  }
+
+  @Test
+  public void goldMemberOnHolidayGets20Percent() {
+    assertEquals(20.0, HarderExercisesLF.calculateDiscount("Gold", true), 0.00001);
+  }
+
+  @Test
+  public void silverMemberNotOnHolidayGets5Percent() {
+    assertEquals(5.0, HarderExercisesLF.calculateDiscount("Silver", false), 0.00001);
+  }
+
+  @Test
+  public void bronzeMemberOnHolidayGets7Percent() {
+    assertEquals(8.0, HarderExercisesLF.calculateDiscount("Bronze", true), 0.00001);
+  }
+
+  @Test
+  public void regularCustomerOnHolidayGets5Percent() {
+    assertEquals(5.0, HarderExercisesLF.calculateDiscount("Regular", true), 0.00001);
+  }
+
+  @Test
+  public void bronzeMemberNotOnHolidayGets3Percent() {
+    assertEquals(3.0, HarderExercisesLF.calculateDiscount("Bronze", false), 0.00001);
   }
 }
