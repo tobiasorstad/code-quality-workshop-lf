@@ -138,4 +138,39 @@ public class HarderExercisesLFTest {
     List<String> result = HarderExercisesLF.getTopFivePaidEmployeeNames(employees);
     assertEquals(List.of("EVE", "ALICE", "BOB"), result);
   }
+
+  @Test
+  public void validUserReturnsTrue() {
+    assertTrue(HarderExercisesLF.isValidUser("alice", "password123"));
+  }
+
+  @Test
+  public void invalidUserReturnsFalse() {
+    assertFalse(HarderExercisesLF.isValidUser("charlie", "randompass"));
+  }
+
+  @Test
+  public void goldMemberOnHolidayGets20Percent() {
+    assertEquals(20.0, HarderExercisesLF.calculateDiscount("Gold", true), 0.00001);
+  }
+
+  @Test
+  public void silverMemberNotOnHolidayGets5Percent() {
+    assertEquals(5.0, HarderExercisesLF.calculateDiscount("Silver", false), 0.00001);
+  }
+
+  @Test
+  public void bronzeMemberOnHolidayGets7Percent() {
+    assertEquals(8.0, HarderExercisesLF.calculateDiscount("Bronze", true), 0.00001);
+  }
+
+  @Test
+  public void regularCustomerOnHolidayGets5Percent() {
+    assertEquals(5.0, HarderExercisesLF.calculateDiscount("Regular", true), 0.00001);
+  }
+
+  @Test
+  public void bronzeMemberNotOnHolidayGets3Percent() {
+    assertEquals(3.0, HarderExercisesLF.calculateDiscount("Bronze", false), 0.00001);
+  }
 }
