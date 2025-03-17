@@ -89,20 +89,32 @@ public class HarderExercisesLF {
         );
 
     // EXERCISE K
-    public record Employee( String name, int salary, boolean active, String department){}
+    public static class Employee{
+        String name;
+        int salary;
+        boolean active;
+        String department;
+
+        public Employee(String name, int salary, boolean active, String department){
+            this.name = name;
+            this.salary = salary;
+            this.active = active;
+            this.department = department;
+        }
+    }
 
     public static List<String> getTopFivePaidEmployeeNames(List<HarderExercisesLF.Employee> employees) {
         return employees.stream()
-            .filter(e -> employeeIsValid(e) && e.active())
+            .filter(e -> employeeIsValid(e) && e.active)
             .sorted((e1, e2) -> compareBasedOnSalary(e1, e2))
             .limit(5)
-            .map(e -> e.name().toUpperCase())
+            .map(e -> e.name.toUpperCase())
             .distinct()
             .toList();
     }
 
     public static int compareBasedOnSalary(HarderExercisesLF.Employee employee1, HarderExercisesLF.Employee employee2){
-        return Double.compare(employee2.salary(), employee1.salary());
+        return Double.compare(employee2.salary, employee1.salary);
     }
 
     private static boolean employeeIsValid(HarderExercisesLF.Employee employee){
