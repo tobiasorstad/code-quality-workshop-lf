@@ -141,4 +141,48 @@ public class HarderExercisesLF {
         double discount = BASE_DISCOUNTS.getOrDefault(membershipLevel, 0.0);
         return isHoliday ? discount + 5.0 : discount;
     }
+
+    // EXERCISE O
+    // -------------------------------------------------------------------------
+    //
+    // [HARDER exercise]
+    //
+    // Description to come
+    //
+    public static boolean isLeapYear(int year) {
+        // If year is divisible by 4
+        if (year % 4 == 0) {
+            // If year is divisible by 100
+            if (year % 100 == 0) {
+                // If year is divisible by 400
+                if (year % 400 == 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    // Eller
+
+    public static boolean isLeapYear2(int year) {
+        return (isDivisibleByFour(year) && !isDivisibleByHundred(year)) || isDivisibleByFourHundred(year);
+    }
+
+    private static boolean isDivisibleByFour(int year) {
+        return year % 4 == 0;
+    }
+
+    private static boolean isDivisibleByHundred(int year) {
+        return year % 100 == 0;
+    }
+
+    private static boolean isDivisibleByFourHundred(int year) {
+        return year % 400 == 0;
+    }
 }
