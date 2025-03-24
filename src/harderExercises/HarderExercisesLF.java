@@ -147,7 +147,13 @@ public class HarderExercisesLF {
     //
     // [HARDER exercise]
     //
-    // Description to come
+    // This method decides if a year is a leap year or not.
+    // The function has many nested if-checks, different ways of checking modulo, inconsistent
+    // indentation and is overall pretty difficult to read. Additionally, it has a
+    // useless helper function and the comments are misleading.
+    //
+    // To fix, check modulo in a more consistent way, tidy the if-checks, and fix or remove comments.
+    // To consider: do you want to solve this with or without helper functions?
     //
     public static boolean isLeapYear(int year) {
         // If year is divisible by 4
@@ -168,7 +174,7 @@ public class HarderExercisesLF {
         }
     }
 
-    // Eller
+    // Or, using helper functions (personally I think it's easier to read)
 
     public static boolean isLeapYear2(int year) {
         return (isDivisibleByFour(year) && !isDivisibleByHundred(year)) || isDivisibleByFourHundred(year);

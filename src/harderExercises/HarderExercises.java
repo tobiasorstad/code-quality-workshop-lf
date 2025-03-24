@@ -1,18 +1,16 @@
 package harderExercises;
 
+import java.math.BigInteger;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
+import static java.lang.Integer.parseInt;
 import static java.lang.Math.*;
+import static java.lang.Math.toRadians;
 
 public class HarderExercises {
-
-    /*
-        Forslag til tema:
-        Lambda og streams.
-        Designpatters, strategy pattern, adapter, factory, building pattern.
-     */
 
     // EXERCISE I
     // -------------------------------------------------------------------------
@@ -30,17 +28,16 @@ public class HarderExercises {
     // - extract the magic number 6372.8 to a constant, with a nice name
     // - fix the coding style so it's consistent
     // - use either the Math.[method] syntax consistently, or the static imports.
-    //   mixing both doesn't look nice.
+    // mixing both doesn't look nice.
     //
     // note that even after a nice refactoring, this formula should still look
     // a bit cryptic! it's advanced stuff, after all. all we ask here, is that
     // you make it a bit clearer.
     //
     public static double haversine(double lat1, double lon1, double lat2, double lon2) {
-        return 2 *  6372.8 * asin(sqrt(pow(Math.sin( toRadians(lat2-lat1)/2),2) +
-            pow(sin(Math.toRadians(lon2 - lon1)/ 2),2) * cos(toRadians(lat1)) *cos(toRadians(lat2))));
+        return 2 * 6372.8 * asin(sqrt(pow(Math.sin(toRadians(lat2 - lat1) / 2), 2) +
+                pow(sin(Math.toRadians(lon2 - lon1) / 2), 2) * cos(toRadians(lat1)) * cos(toRadians(lat2))));
     }
-
 
     // EXERCISE J
     // -------------------------------------------------------------------------
@@ -61,9 +58,9 @@ public class HarderExercises {
 
         if (scheme != null) {
             if (!scheme.equals("ftp") && !scheme.equals("sftp") &&
-                !scheme.equals("irc") && !scheme.equals("http") &&
-                !scheme.equals("https") && !scheme.equals("ws") &&
-                !scheme.equals("wss")) {
+                    !scheme.equals("irc") && !scheme.equals("http") &&
+                    !scheme.equals("https") && !scheme.equals("ws") &&
+                    !scheme.equals("wss")) {
                 throw new IllegalArgumentException("illegal scheme '" + scheme + "'");
             }
 
@@ -126,41 +123,158 @@ public class HarderExercises {
     // Create some smaller methods with descriptive names that make the method
     // easier to understand. Consider creating a new method name.
     //
-    public record Employee( String name, int salary, boolean active, String department){}
+    public static class Employee {
+        String name;
+        int salary;
+        boolean active;
+        String department;
+
+        public Employee(String name, int salary, boolean active, String department) {
+            this.name = name;
+            this.salary = salary;
+            this.active = active;
+            this.department = department;
+        }
+    }
 
     public static List<String> getTopEmployees(List<Employee> employees) {
         return employees.stream()
-            .filter(e -> e.name != null)
-            .sorted(Comparator.comparing(e -> e.name))
-            .collect(Collectors.groupingBy(Employee::department))
-            .values()
-            .stream().flatMap(List::stream)
-            .filter(e -> e != null && e.active())
-            .sorted((e1, e2) -> Double.compare(e2.salary(), e1.salary()))
-            .limit(5)
-            .filter(e -> e.name() != null)
-            .map(e -> e.name().toUpperCase())
-            .distinct()
-            .collect(Collectors.toList());
+                .filter(e -> e.name != null)
+                .sorted(Comparator.comparing(e -> e.name))
+                .collect(Collectors.groupingBy(e -> e.department))
+                .values()
+                .stream().flatMap(List::stream)
+                .filter(e -> e != null && e.active)
+                .sorted((e1, e2) -> Double.compare(e2.salary, e1.salary))
+                .limit(5)
+                .filter(e -> e.name != null)
+                .map(e -> e.name.toUpperCase())
+                .distinct()
+                .collect(Collectors.toList());
     }
 
-    public static List<String> getTopFivePaidEmployeeNames(List<Employee> employees) {
-        return employees.stream()
-            .filter(e -> employeeIsValid(e) && e.active())
-            .sorted((e1, e2) -> compareBasedOnSalary(e1, e2))
-            .limit(5)
-            .map(e -> e.name().toUpperCase())
-            .distinct()
-            .toList();
+    // Exercise L
+
+    public static boolean isValidUser(String username, String password) {
+        final Map<String, String> users = Map.of("alice", "password123", "bob", "securepass");
+
+        try {
+            if (!users.containsKey(username)) {
+                throw new Exception("User not found");
+            }
+            if (!users.get(username).equals(password)) {
+                throw new Exception("Invalid password");
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
-    public static int compareBasedOnSalary(Employee employee1, Employee employee2){
-        return Double.compare(employee2.salary(), employee1.salary());
+
+    // EXERCISE M: Receipt Calculator
+    // -------------------------------------------------------------------------
+    //
+    // [HARDER exercise]
+    //
+    // The method below calculates a receipt summary for a shopping cart.
+    // It takes a list of items with their prices and quantities, applies
+    // discounts, and calculates totals. While it works, the code is messy
+    // and hard to maintain.
+    //
+    // Your tasks are:
+    // - Split the logic into meaningful methods
+    // - Make the code more readable while maintaining exact functionality
+    // - Consider using streams where appropriate
+    //
+
+    public static String calculateReceipt(String[] items, double[] prices, int[] qty) {
+        if (items == null || prices == null || qty == null ||
+                items.length != prices.length || prices.length != qty.length) return "ERROR";
+
+        int totalItemsCount = 0;
+        String maxItem = "";
+        double maxItemTotal = 0;
+
+        for (int i = 0; i < items.length; i++) {
+            double sum = prices[i] * qty[i];
+            if (qty[i] >= 3) sum *= 0.9;
+            if (sum > maxItemTotal) {
+                maxItemTotal = sum;
+                maxItem = items[i];
+            }
+            totalItemsCount += qty[i];
+        }
+
+        double totalItemsPrice = 0;
+        for (int i = 0; i < items.length; i++) {
+            double sum = prices[i] * qty[i];
+            if (qty[i] >= 3) sum *= 0.9;
+            totalItemsPrice += sum;
+        }
+
+        return Math.round(totalItemsPrice * 100.0) / 100.0 + "," +
+                totalItemsCount + "," +
+                maxItem;
     }
 
-    private static boolean employeeIsValid(Employee employee){
-        return employee != null && employee.name != null;
+    // Exercise N
+    // -------------------------------------------------------------------------
+    //
+    // [HARDER exercise]
+    //
+    // The method below uses nested ternary operators
+    // If the argument it validates is true, it returns the value after the "?"
+    // if it is false it returns the value after the ":".
+    // Nesting the ternary operators like this makes the method
+    // very hard to read. Refactor the method.
+    public static double calculateDiscount(String membershipLevel, boolean isHoliday) {
+        return membershipLevel.equals("Gold")
+                ? (isHoliday ? 20.0 : 15.0)
+                : (membershipLevel.equals("Silver")
+                ? (isHoliday ? 10.0 : 5.0)
+                : (membershipLevel.equals("Bronze")
+                ? (isHoliday ? 8.0 : 3.0)
+                : (isHoliday ? 5.0 : 0.0)));
     }
 
+    // EXERCISE O
+    // -------------------------------------------------------------------------
+    //
+    // [HARDER exercise]
+    //
+    // This method decides if a year is a leap year or not.
+    // The function has many nested if-checks, different ways of checking modulo, inconsistent
+    // indentation and is overall pretty difficult to read. Additionally, it has a
+    // useless helper function and the comments are misleading.
+    //
+    // To fix, check modulo in a more consistent way, tidy the if-checks, and fix or remove comments.
+    // To consider: do you want to solve this with or without helper functions?
+    //
+    public static boolean isLeapYear(int year) {
+        // If year is divisible by 4
+        if (year % -4 == parseInt("0")) {
+            // If year has good vibes
+            if (0 == (year & (4 - 1)) && Math.floorMod(year, 100) == 0) {
+                // Check Big Value
+                if (BigInteger.valueOf(year).remainder(BigInteger.valueOf(400)).equals(BigInteger.valueOf(0)))
+                    return true;
+                    // TODO: refactor
+                else {
+                    return returnCorrectResult();
+                }
+            } else return !false;
+
+            // Reminder: dentist appointment at 3
+        } else {
+            return false;
+        }
+    }
+
+    private static boolean returnCorrectResult() {
+        return !true;
+    }
+
+    ;
 
 }

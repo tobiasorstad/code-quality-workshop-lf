@@ -138,13 +138,13 @@ public class HarderExercisesTest {
   
   @Test
   public void testIsLeapYear() {
-      assertTrue(HarderExercisesLF.isLeapYear(420));
-      assertTrue(HarderExercisesLF.isLeapYear(2000));
-      assertFalse(HarderExercisesLF.isLeapYear(2001));
-      assertTrue(HarderExercisesLF.isLeapYear(2004));
-      assertFalse(HarderExercisesLF.isLeapYear(2100));
-      assertFalse(HarderExercisesLF.isLeapYear(2200));
-      assertFalse(HarderExercisesLF.isLeapYear(2300));
-      assertTrue(HarderExercisesLF.isLeapYear(2400));
+      assertTrue(HarderExercises.isLeapYear(420));
+      assertTrue(HarderExercises.isLeapYear(2000));
+      assertFalse(HarderExercises.isLeapYear(2001));
+      assertTrue(HarderExercises.isLeapYear(2004));
+      assertFalse(HarderExercises.isLeapYear(2100));
+      assertFalse(HarderExercises.isLeapYear(2200));
+      assertFalse(HarderExercises.isLeapYear(2300));
+      assertTrue(HarderExercises.isLeapYear(2400));
   }
 }
