@@ -1,7 +1,10 @@
 package harderExercises;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 import static java.lang.Math.*;
 
@@ -128,7 +131,58 @@ public class HarderExercisesLF {
     }
 
     // Exercise M
-    //TODO
+    public class calculateReceipt {
+        private static final double BULK_DISCOUNT = 0.9; // 10% discount (multiply by 0.9)
+        private static final int BULK_QUANTITY_THRESHOLD = 3;
+
+        public static String calculateReceipt(String[] items, double[] prices, int[] qty) {
+            if (!isValidInput(items, prices, qty)) {
+                return "ERROR";
+            }
+
+            double totalPrice = calculateTotalPrice(prices, qty);
+            int totalItems = calculateTotalItems(qty);
+            String itemWithHighestTotal = findItemWithHighestTotal(items, prices, qty);
+
+            return formatResult(totalPrice, totalItems, itemWithHighestTotal);
+        }
+
+        private static boolean isValidInput(String[] items, double[] prices, int[] qty) {
+            return items != null &&
+                    prices != null &&
+                    qty != null &&
+                    items.length == prices.length &&
+                    prices.length == qty.length;
+        }
+
+        private static double calculateItemTotal(double price, int quantity) {
+            double total = price * quantity;
+            return quantity >= BULK_QUANTITY_THRESHOLD ? total * BULK_DISCOUNT : total;
+        }
+
+        private static double calculateTotalPrice(double[] prices, int[] qty) {
+            return IntStream.range(0, prices.length)
+                    .mapToDouble(i -> calculateItemTotal(prices[i], qty[i]))
+                    .sum();
+        }
+
+        private static int calculateTotalItems(int[] qty) {
+            return Arrays.stream(qty).sum();
+        }
+
+        private static String findItemWithHighestTotal(String[] items, double[] prices, int[] qty) {
+            return IntStream.range(0, items.length)
+                    .boxed()
+                    .max(Comparator.comparingDouble(i -> calculateItemTotal(prices[i], qty[i])))
+                    .map(i -> items[i])
+                    .orElse("");
+        }
+
+        private static String formatResult(double totalPrice, int totalItems, String maxItem) {
+            double roundedTotal = Math.round(totalPrice * 100.0) / 100.0;
+            return roundedTotal + "," + totalItems + "," + maxItem;
+        }
+    }
 
     // Exercise N
     private static final Map<String, Double> BASE_DISCOUNTS = Map.of(
