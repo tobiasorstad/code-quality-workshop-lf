@@ -196,6 +196,39 @@ public class HarderExercisesLF {
         return isHoliday ? discount + 5.0 : discount;
     }
 
+    //evt med enum
+
+    public enum MembershipLevel {
+        GOLD(15.0),
+        SILVER(5.0),
+        BRONZE(3.0),
+        NONE(0.0);
+
+        private final double baseDiscount;
+
+        MembershipLevel(double baseDiscount) {
+            this.baseDiscount = baseDiscount;
+        }
+
+        public double getBaseDiscount() {
+            return baseDiscount;
+        }
+
+        public static MembershipLevel fromString(String level) {
+            try {
+                return MembershipLevel.valueOf(level.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                return NONE;
+            }
+        }
+    }
+
+    public static double calculateDiscount2(String membershipLevel, boolean isHoliday) {
+        MembershipLevel level = MembershipLevel.fromString(membershipLevel);
+        return level.getBaseDiscount() + (isHoliday ? 5.0 : 0);
+    }
+
+
     // EXERCISE O
     // -------------------------------------------------------------------------
     //

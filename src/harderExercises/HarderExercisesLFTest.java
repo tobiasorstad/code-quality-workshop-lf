@@ -173,4 +173,14 @@ public class HarderExercisesLFTest {
   public void bronzeMemberNotOnHolidayGets3Percent() {
     assertEquals(3.0, HarderExercisesLF.calculateDiscount("Bronze", false), 0.00001);
   }
+
+  @Test
+  public void goldMemberOnHolidayGets20Percent2() {
+    assertEquals(20.0, HarderExercisesLF.calculateDiscount2("Gold", true), 0.00001);
+  }
+
+  @Test
+  public void silverMemberNotOnHolidayGets5Percent2() {
+    assertEquals(5.0, HarderExercisesLF.calculateDiscount2("Silver", false), 0.00001);
+  }
 }
