@@ -183,4 +183,16 @@ public class HarderExercisesLFTest {
   public void silverMemberNotOnHolidayGets5Percent2() {
     assertEquals(5.0, HarderExercisesLF.calculateDiscount2("Silver", false), 0.00001);
   }
+
+  @Test
+  public void testIsLeapYear() {
+    assertTrue(HarderExercisesLF.isLeapYear(420));
+    assertTrue(HarderExercisesLF.isLeapYear(2000));
+    assertFalse(HarderExercisesLF.isLeapYear(2001));
+    assertTrue(HarderExercisesLF.isLeapYear(2004));
+    assertFalse(HarderExercisesLF.isLeapYear(2100));
+    assertFalse(HarderExercisesLF.isLeapYear(2200));
+    assertFalse(HarderExercisesLF.isLeapYear(2300));
+    assertTrue(HarderExercisesLF.isLeapYear(2400));
+  }
 }
