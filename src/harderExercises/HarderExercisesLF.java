@@ -165,15 +165,10 @@ public class HarderExercisesLF {
                     prices.length == qty.length;
         }
 
-        private static double calculateItemTotal(double price, int quantity) {
-            double total = price * quantity;
-            return quantity >= BULK_QUANTITY_THRESHOLD ? total * BULK_DISCOUNT : total;
-        }
-
         private static double calculateTotalPrice(double[] prices, int[] qty) {
             return IntStream.range(0, prices.length)
-                    .mapToDouble(i -> calculateItemTotal(prices[i], qty[i]))
-                    .sum();
+                .mapToDouble(i -> calculateItemTotal(prices[i], qty[i]))
+                .sum();
         }
 
         private static int calculateTotalItems(int[] qty) {
@@ -182,10 +177,15 @@ public class HarderExercisesLF {
 
         private static String findItemWithHighestTotal(String[] items, double[] prices, int[] qty) {
             return IntStream.range(0, items.length)
-                    .boxed()
-                    .max(Comparator.comparingDouble(i -> calculateItemTotal(prices[i], qty[i])))
-                    .map(i -> items[i])
-                    .orElse("");
+                .boxed()
+                .max(Comparator.comparingDouble(i -> calculateItemTotal(prices[i], qty[i])))
+                .map(i -> items[i])
+                .orElse("");
+        }
+
+        private static double calculateItemTotal(double price, int quantity) {
+            double total = price * quantity;
+            return quantity >= BULK_QUANTITY_THRESHOLD ? total * BULK_DISCOUNT : total;
         }
 
         private static String formatResult(double totalPrice, int totalItems, String maxItem) {
