@@ -176,6 +176,7 @@ public class HarderExercisesLF {
         }
 
         private static String findItemWithHighestTotal(String[] items, double[] prices, int[] qty) {
+            // Alternativ til for loop
             return IntStream.range(0, items.length)
                 .boxed()
                 .max(Comparator.comparingDouble(i -> calculateItemTotal(prices[i], qty[i])))
@@ -271,9 +272,16 @@ public class HarderExercisesLF {
         }
     }
 
+    public static boolean isLeapYear2(int year) {
+        if (year % 4 == 0 && year % 100 != 0) {
+            return true;
+        }
+        return  (year % 400 == 0);
+    }
+
     // Or, using helper functions (personally I think it's easier to read)
 
-    public static boolean isLeapYear2(int year) {
+    public static boolean isLeapYear3(int year) {
         return (isDivisibleByFour(year) && !isDivisibleByHundred(year)) || isDivisibleByFourHundred(year);
     }
 
