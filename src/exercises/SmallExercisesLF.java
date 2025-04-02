@@ -106,7 +106,6 @@ public final class SmallExercisesLF {
   // with no if statements AND no new variables...
   //
   public static boolean isIncreasingSequence(int a, int b, int c, int d) {
-
     return a < b && b < c && c < d;
   }
 
@@ -163,7 +162,6 @@ public final class SmallExercisesLF {
   // - exception messages
   //
   public static int flooredRoot(double x) {
-    // Cannot calculate root of 0
     if (x < 0) {
       throw new IllegalArgumentException("Cannot calculate root of a negative number");
     }
