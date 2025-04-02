@@ -47,7 +47,7 @@ public class HarderExercisesLF {
     //
     public static String formatURL2(String scheme, String hostname, Integer portNum, String path) {
 
-        checkForExceptions(scheme, hostname, portNum, path);
+        checkValidity(scheme, hostname, portNum, path);
         String res = scheme + "://" + hostname;
 
         if (!portNum.equals(acceptedSchemePortNumbers.get(scheme))) {
@@ -58,7 +58,7 @@ public class HarderExercisesLF {
         return res;
     }
 
-    private static void checkForExceptions(String scheme, String hostname, Integer portNum, String path) throws IllegalArgumentException {
+    private static void checkValidity(String scheme, String hostname, Integer portNum, String path) throws IllegalArgumentException {
         if(scheme == null) {
             throw new IllegalArgumentException("scheme is null");
         }
@@ -106,6 +106,14 @@ public class HarderExercisesLF {
         }
     }
 
+    /*
+        Laget egen isValid metode som sjekker for null
+        Fjernet sortering på navn siden den overskrives av sortering på lønn
+        Fjernet gruppering på avdeling og flatmapping siden hele prossessen gjør ingenting
+        Laget hjelpemetode for lønnssammenligning med beskrivende navn
+        Bruker toList() siden det er kortere
+     */
+
     public static List<String> getTopFivePaidEmployeeNames(List<HarderExercisesLF.Employee> employees) {
         return employees.stream()
             .filter(e -> employeeIsValid(e) && e.active)
@@ -116,13 +124,15 @@ public class HarderExercisesLF {
             .toList();
     }
 
+    private static boolean employeeIsValid(HarderExercisesLF.Employee employee){
+        return employee != null && employee.name != null;
+    }
+
     public static int compareBasedOnSalary(HarderExercisesLF.Employee employee1, HarderExercisesLF.Employee employee2){
         return Double.compare(employee2.salary, employee1.salary);
     }
 
-    private static boolean employeeIsValid(HarderExercisesLF.Employee employee){
-        return employee != null && employee.name != null;
-    }
+
 
     // Exercise L
     public static boolean isValidUser(String username, String password) {
