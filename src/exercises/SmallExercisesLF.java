@@ -77,18 +77,14 @@ public final class SmallExercisesLF {
   // you're welcome to let the editor help you along, if you like.
   //
   public static String describeNumber(int n) {
-    if(n >= 20_000){
-      return "HUGE!";
-    }
-    if(n >= 10_000){
-      return "very big!";
-    }
-    if(n <= -20000){
-      return "TINY!";
-    }
-    if(n <= -10 * 1000){
-      return "very small!";
-    }
+    // Describe positive numbers
+    if(n >= 20_000) return "HUGE!";
+    else if(n >= 10_000) return "very big!";
+
+    // Describe negative numbers
+    if(n <= -20000) return "TINY!";
+    else if(n <= -10000) return "very small!";
+
     return "decently sized";
   }
 
